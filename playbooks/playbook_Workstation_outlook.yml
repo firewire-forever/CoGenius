@@ -1,0 +1,25 @@
+---
+- name: Install Outlook on Workstation
+  hosts: workstation
+  become: yes
+  tasks:
+    - name: Check if Outlook is already installed
+      win_package:
+        name: Microsoft Office 365
+        state: present
+      register: outlook_check
+
+    - name: Install Outlook if not present
+      win_package:
+        name: Microsoft Outlook
+        state: present
+      when: not outlook_check.exists
+
+    - name: Verify Outlook installation
+      win_command: powershell.exe "Get-Command outlook.exe -ErrorAction SilentlyContinue"
+      register: outlook_check_result
+      failed_when: outlook_check_result.rc != 0
+
+    - name: Display installation result
+      debug:
+        msg: "Outlook installation completed successfully"

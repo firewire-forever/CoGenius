@@ -1,0 +1,18 @@
+# PDF-RE Service Dependencies
+# GPU-accelerated PDF parsing service
+
+# Web Framework
+flask>=2.3.0
+werkzeug>=2.3.0
+gunicorn>=21.0.0
+
+# PDF Parsing Backends
+pdfplumber>=0.10.0
+pypdf>=3.0.0
+
+# High-quality OCR (requires GPU for good performance)
+# Uncomment when deploying on GPU server:
+# marker>=1.0.0
+
+# HTTP Client (for potential external API calls)
+requests>=2.31.0

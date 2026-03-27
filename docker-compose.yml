@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+
+  redis:
+    image: redis:6-alpine
+    container_name: crcg_redis
+    restart: unless-stopped
+    networks:
+      - crcg_network
+
+  web:
+    build: .
+    container_name: crcg_web
+    command: /home/appuser/app/entrypoint.sh
+    volumes:
+      - ./data:/home/appuser/app/data
+      - ./instance:/home/appuser/app/instance
+      - ./models:/home/appuser/app/models
+      - /tmp:/tmp
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./.env.docker
+    depends_on:
+      redis:
+        condition: service_started
+    restart: unless-stopped
+    networks:
+      - crcg_network
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    # 以下环境变量确保即使在离线模式不工作时，也可以尝试在线下载
+    environment:
+      - HF_HUB_OFFLINE=0
+      - TRANSFORMERS_OFFLINE=0
+      - HF_DATASETS_OFFLINE=0
+      - HF_HOME=/home/appuser/app/models
+      - HF_HUB_LOCAL_DIR=/home/appuser/app/models
+
+  worker:
+    build: .
+    container_name: crcg_worker
+    entrypoint: []
+    command: celery -A celery_worker.celery_app worker --loglevel=info
+    volumes:
+      - ./data:/home/appuser/app/data
+      - ./models:/home/appuser/app/models
+      - /tmp:/tmp
+    env_file:
+      - ./.env.docker
+    depends_on:
+      redis:
+        condition: service_started
+    restart: unless-stopped
+    networks:
+      - crcg_network
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    # 以下环境变量确保即使在离线模式不工作时，也可以尝试在线下载
+    environment:
+      - HF_HUB_OFFLINE=0
+      - TRANSFORMERS_OFFLINE=0
+      - HF_DATASETS_OFFLINE=0
+      - HF_HOME=/home/appuser/app/models
+      - HF_HUB_LOCAL_DIR=/home/appuser/app/models
+
+networks:
+  crcg_network:
+    driver: bridge

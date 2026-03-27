@@ -1,0 +1,804 @@
+# Software Installation Knowledge Base for VSDL Compiler
+# 软件安装知识库 - 用于自动化生成 Ansible 安装任务
+#
+# 字段说明:
+#   type: apt | script | manual | pip
+#   package: apt 包名 (type=apt 时)
+#   verify_cmd: 验证安装是否成功的命令
+#   install_script: 自定义安装脚本 (type=script 时)
+#   dependencies: 依赖软件列表
+#   offline_available: 是否可在离线环境安装
+
+software:
+  # ==========================================================================
+  # Web 服务器
+  # ==========================================================================
+  nginx:
+    type: apt
+    package: nginx
+    verify_cmd: "nginx -v"
+    offline_available: true
+
+  apache2:
+    type: apt
+    package: apache2
+    verify_cmd: "apache2 -v"
+    offline_available: true
+
+  apache:
+    type: apt
+    package: apache2
+    verify_cmd: "apache2 -v"
+    offline_available: true
+
+  httpd:
+    type: apt
+    package: apache2
+    verify_cmd: "apache2 -v"
+    offline_available: true
+
+  tomcat:
+    type: apt
+    package: tomcat9
+    verify_cmd: "systemctl status tomcat9"
+    offline_available: true
+
+  tomcat9:
+    type: apt
+    package: tomcat9
+    verify_cmd: "systemctl status tomcat9"
+    offline_available: true
+
+  lighttpd:
+    type: apt
+    package: lighttpd
+    verify_cmd: "lighttpd -v"
+    offline_available: true
+
+  # ==========================================================================
+  # 数据库
+  # ==========================================================================
+  mysql:
+    type: apt
+    package: mysql-server
+    verify_cmd: "mysql --version"
+    offline_available: true
+
+  mysql-server:
+    type: apt
+    package: mysql-server
+    verify_cmd: "mysql --version"
+    offline_available: true
+
+  mariadb:
+    type: apt
+    package: mariadb-server
+    verify_cmd: "mysql --version"
+    offline_available: true
+
+  postgresql:
+    type: apt
+    package: postgresql
+    verify_cmd: "psql --version"
+    offline_available: true
+
+  postgres:
+    type: apt
+    package: postgresql
+    verify_cmd: "psql --version"
+    offline_available: true
+
+  mongodb:
+    type: script
+    install_script: |
+      apt-get install -y gnupg curl
+      curl -fsSL https://www.mongodb.org/static/pgp/server-6.0.asc | gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg --dearmor
+      echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+      apt-get update
+      apt-get install -y mongodb-org
+    verify_cmd: "mongod --version"
+    offline_available: false
+
+  redis:
+    type: apt
+    package: redis-server
+    verify_cmd: "redis-cli --version"
+    offline_available: true
+
+  redis-server:
+    type: apt
+    package: redis-server
+    verify_cmd: "redis-cli --version"
+    offline_available: true
+
+  sqlite:
+    type: apt
+    package: sqlite3
+    verify_cmd: "sqlite3 --version"
+    offline_available: true
+
+  sqlite3:
+    type: apt
+    package: sqlite3
+    verify_cmd: "sqlite3 --version"
+    offline_available: true
+
+  elasticsearch:
+    type: script
+    install_script: |
+      apt-get install -y apt-transport-https
+      wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+      echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
+      apt-get update
+      apt-get install -y elasticsearch
+    verify_cmd: "elasticsearch --version"
+    offline_available: false
+
+  # ==========================================================================
+  # Java 运行环境
+  # ==========================================================================
+  java:
+    type: apt
+    package: openjdk-11-jdk
+    verify_cmd: "java -version"
+    offline_available: true
+
+  jdk:
+    type: apt
+    package: openjdk-11-jdk
+    verify_cmd: "java -version"
+    offline_available: true
+
+  openjdk:
+    type: apt
+    package: openjdk-11-jdk
+    verify_cmd: "java -version"
+    offline_available: true
+
+  openjdk-8-jdk:
+    type: apt
+    package: openjdk-8-jdk
+    verify_cmd: "java -version"
+    offline_available: true
+
+  openjdk-11-jdk:
+    type: apt
+    package: openjdk-11-jdk
+    verify_cmd: "java -version"
+    offline_available: true
+
+  openjdk-17-jdk:
+    type: apt
+    package: openjdk-17-jdk
+    verify_cmd: "java -version"
+    offline_available: true
+
+  # ==========================================================================
+  # PHP 运行环境
+  # ==========================================================================
+  php:
+    type: apt
+    package: php
+    verify_cmd: "php -v"
+    offline_available: true
+
+  php-fpm:
+    type: apt
+    package: php-fpm
+    verify_cmd: "php-fpm --version"
+    offline_available: true
+
+  libapache2-mod-php:
+    type: apt
+    package: libapache2-mod-php
+    verify_cmd: "php -v"
+    offline_available: true
+
+  php-mysql:
+    type: apt
+    package: php-mysql
+    verify_cmd: "php -m | grep mysql"
+    offline_available: true
+
+  composer:
+    type: script
+    install_script: |
+      curl -sS https://getcomposer.org/installer | php
+      mv composer.phar /usr/local/bin/composer
+      chmod +x /usr/local/bin/composer
+    verify_cmd: "composer --version"
+    offline_available: false
+
+  # ==========================================================================
+  # Python 运行环境
+  # ==========================================================================
+  python:
+    type: apt
+    package: python3
+    verify_cmd: "python3 --version"
+    offline_available: true
+
+  python3:
+    type: apt
+    package: python3
+    verify_cmd: "python3 --version"
+    offline_available: true
+
+  pip:
+    type: apt
+    package: python3-pip
+    verify_cmd: "pip3 --version"
+    offline_available: true
+
+  python3-pip:
+    type: apt
+    package: python3-pip
+    verify_cmd: "pip3 --version"
+    offline_available: true
+
+  python3-venv:
+    type: apt
+    package: python3-venv
+    verify_cmd: "python3 -m venv --help"
+    offline_available: true
+
+  # ==========================================================================
+  # Node.js 运行环境
+  # ==========================================================================
+  nodejs:
+    type: script
+    install_script: |
+      curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+      apt-get install -y nodejs
+    verify_cmd: "node --version"
+    offline_available: false
+
+  node:
+    type: script
+    install_script: |
+      curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+      apt-get install -y nodejs
+    verify_cmd: "node --version"
+    offline_available: false
+
+  npm:
+    type: script
+    install_script: |
+      curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+      apt-get install -y nodejs
+    verify_cmd: "npm --version"
+    offline_available: false
+
+  # ==========================================================================
+  # FTP 服务器
+  # ==========================================================================
+  ftp:
+    type: apt
+    package: vsftpd
+    verify_cmd: "vsftpd -v"
+    offline_available: true
+
+  vsftpd:
+    type: apt
+    package: vsftpd
+    verify_cmd: "vsftpd -v"
+    offline_available: true
+
+  proftpd:
+    type: apt
+    package: proftpd
+    verify_cmd: "proftpd -v"
+    offline_available: true
+
+  pure-ftpd:
+    type: apt
+    package: pure-ftpd
+    verify_cmd: "pure-ftpd --help"
+    offline_available: true
+
+  # ==========================================================================
+  # 邮件服务
+  # ==========================================================================
+  postfix:
+    type: apt
+    package: postfix
+    verify_cmd: "postconf mail_version"
+    offline_available: true
+
+  dovecot:
+    type: apt
+    package: dovecot-core
+    verify_cmd: "dovecot --version"
+    offline_available: true
+
+  sendmail:
+    type: apt
+    package: sendmail
+    verify_cmd: "sendmail -d0.1 -bv root"
+    offline_available: true
+
+  # ==========================================================================
+  # DNS 服务
+  # ==========================================================================
+  dns:
+    type: apt
+    package: bind9
+    verify_cmd: "named -v"
+    offline_available: true
+
+  bind:
+    type: apt
+    package: bind9
+    verify_cmd: "named -v"
+    offline_available: true
+
+  bind9:
+    type: apt
+    package: bind9
+    verify_cmd: "named -v"
+    offline_available: true
+
+  dnsmasq:
+    type: apt
+    package: dnsmasq
+    verify_cmd: "dnsmasq --version"
+    offline_available: true
+
+  # ==========================================================================
+  # 文件共享
+  # ==========================================================================
+  samba:
+    type: apt
+    package: samba
+    verify_cmd: "smbd --version"
+    offline_available: true
+
+  nfs:
+    type: apt
+    package: nfs-kernel-server
+    verify_cmd: "exportfs -v"
+    offline_available: true
+
+  nfs-server:
+    type: apt
+    package: nfs-kernel-server
+    verify_cmd: "exportfs -v"
+    offline_available: true
+
+  # ==========================================================================
+  # 安全/渗透测试工具
+  # ==========================================================================
+  nmap:
+    type: apt
+    package: nmap
+    verify_cmd: "nmap --version"
+    offline_available: true
+
+  netcat:
+    type: apt
+    package: netcat
+    verify_cmd: "nc -h"
+    offline_available: true
+
+  nc:
+    type: apt
+    package: netcat
+    verify_cmd: "nc -h"
+    offline_available: true
+
+  wireshark:
+    type: apt
+    package: wireshark
+    verify_cmd: "wireshark --version"
+    offline_available: true
+
+  tcpdump:
+    type: apt
+    package: tcpdump
+    verify_cmd: "tcpdump --version"
+    offline_available: true
+
+  hydra:
+    type: apt
+    package: hydra
+    verify_cmd: "hydra -h"
+    offline_available: true
+
+  john:
+    type: apt
+    package: john
+    verify_cmd: "john --help"
+    offline_available: true
+
+  john-the-ripper:
+    type: apt
+    package: john
+    verify_cmd: "john --help"
+    offline_available: true
+
+  hashcat:
+    type: apt
+    package: hashcat
+    verify_cmd: "hashcat --version"
+    offline_available: true
+
+  metasploit:
+    type: apt
+    package: metasploit-framework
+    verify_cmd: "msfconsole --version"
+    offline_available: true
+
+  sqlmap:
+    type: apt
+    package: sqlmap
+    verify_cmd: "sqlmap --version"
+    offline_available: true
+
+  burpsuite:
+    type: apt
+    package: burpsuite
+    verify_cmd: "which burpsuite"
+    offline_available: true
+
+  nikto:
+    type: apt
+    package: nikto
+    verify_cmd: "nikto -Version"
+    offline_available: true
+
+  dirb:
+    type: apt
+    package: dirb
+    verify_cmd: "dirb"
+    offline_available: true
+
+  gobuster:
+    type: apt
+    package: gobuster
+    verify_cmd: "gobuster version"
+    offline_available: true
+
+  # ==========================================================================
+  # 容器/虚拟化
+  # ==========================================================================
+  docker:
+    type: script
+    install_script: |
+      apt-get update
+      apt-get install -y ca-certificates curl gnupg
+      install -m 0755 -d /etc/apt/keyrings
+      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+      chmod a+r /etc/apt/keyrings/docker.gpg
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" | tee /etc/apt/sources.list.d/docker.list
+      apt-get update
+      apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    verify_cmd: "docker --version"
+    offline_available: false
+
+  docker.io:
+    type: apt
+    package: docker.io
+    verify_cmd: "docker --version"
+    offline_available: true
+
+  docker-compose:
+    type: pip
+    package: docker-compose
+    verify_cmd: "docker-compose --version"
+    offline_available: false
+
+  # ==========================================================================
+  # 常见漏洞软件
+  # ==========================================================================
+  bonitasoft:
+    type: manual
+    install_script: |
+      apt-get install -y openjdk-11-jdk tomcat9
+      # 注意: 需要手动下载 bonita.war 并部署到 tomcat
+      # 无法自动安装，需要从官网下载或内网镜像
+    verify_cmd: "curl -s localhost:8080/bonita"
+    dependencies:
+      - openjdk-11-jdk
+      - tomcat9
+    offline_available: false
+    note: "需要从官网下载 war 包手动部署"
+
+  jenkins:
+    type: script
+    install_script: |
+      apt-get install -y curl gnupg
+      curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | tee /usr/share/keyrings/jenkins-keyring.asc
+      echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" | tee /etc/apt/sources.list.d/jenkins.list
+      apt-get update
+      apt-get install -y jenkins
+    verify_cmd: "systemctl status jenkins"
+    dependencies:
+      - openjdk-11-jdk
+    offline_available: false
+
+  wordpress:
+    type: script
+    install_script: |
+      apt-get install -y apache2 php php-mysql mysql-server
+      cd /tmp
+      wget https://wordpress.org/latest.tar.gz
+      tar -xzf latest.tar.gz
+      mv wordpress /var/www/html/
+      chown -R www-data:www-data /var/www/html/wordpress
+      chmod -R 755 /var/www/html/wordpress
+    verify_cmd: "ls /var/www/html/wordpress"
+    dependencies:
+      - apache2
+      - php
+      - php-mysql
+      - mysql-server
+    offline_available: false
+
+  drupal:
+    type: script
+    install_script: |
+      apt-get install -y apache2 php php-mysql php-gd php-xml php-mbstring
+      cd /tmp
+      wget https://ftp.drupal.org/files/projects/drupal-9.tar.gz
+      tar -xzf drupal-9.tar.gz
+      mv drupal-9 /var/www/html/drupal
+      chown -R www-data:www-data /var/www/html/drupal
+    verify_cmd: "ls /var/www/html/drupal"
+    dependencies:
+      - apache2
+      - php
+      - php-mysql
+    offline_available: false
+
+  joomla:
+    type: script
+    install_script: |
+      apt-get install -y apache2 php php-mysql php-xml php-zip
+      cd /tmp
+      wget https://downloads.joomla.org/cms/joomla4/4-3-0/Joomla_4-3-0-Stable-Full_Package.tar.gz
+      mkdir -p /var/www/html/joomla
+      tar -xzf Joomla_4-3-0-Stable-Full_Package.tar.gz -C /var/www/html/joomla
+      chown -R www-data:www-data /var/www/html/joomla
+    verify_cmd: "ls /var/www/html/joomla"
+    dependencies:
+      - apache2
+      - php
+      - php-mysql
+    offline_available: false
+
+  weblogic:
+    type: manual
+    install_script: |
+      # WebLogic 需要Oracle账号下载，无法自动安装
+      # 需要预先下载安装包并放置在指定位置
+    verify_cmd: "ls /opt/oracle"
+    dependencies:
+      - openjdk-8-jdk
+    offline_available: false
+    note: "需要Oracle账号下载安装包，需手动部署"
+
+  jboss:
+    type: script
+    install_script: |
+      apt-get install -y openjdk-11-jdk
+      cd /opt
+      wget https://github.com/wildfly/wildfly/releases/download/26.1.3.Final/wildfly-26.1.3.Final.tar.gz
+      tar -xzf wildfly-26.1.3.Final.tar.gz
+      ln -s /opt/wildfly-26.1.3.Final /opt/wildfly
+    verify_cmd: "ls /opt/wildfly"
+    dependencies:
+      - openjdk-11-jdk
+    offline_available: false
+
+  wildfly:
+    type: script
+    install_script: |
+      apt-get install -y openjdk-11-jdk
+      cd /opt
+      wget https://github.com/wildfly/wildfly/releases/download/26.1.3.Final/wildfly-26.1.3.Final.tar.gz
+      tar -xzf wildfly-26.1.3.Final.tar.gz
+      ln -s /opt/wildfly-26.1.3.Final /opt/wildfly
+    verify_cmd: "ls /opt/wildfly"
+    dependencies:
+      - openjdk-11-jdk
+    offline_available: false
+
+  struts2:
+    type: manual
+    install_script: |
+      # Struts2 是一个框架，需要部署到 Tomcat
+      # 需要下载示例应用或手动创建
+    verify_cmd: "ls /var/lib/tomcat9/webapps"
+    dependencies:
+      - tomcat9
+      - openjdk-11-jdk
+    offline_available: false
+    note: "Struts2是框架，需要部署war包到tomcat"
+
+  webmin:
+    type: script
+    install_script: |
+      curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh
+      sh setup-repos.sh
+      apt-get install -y webmin
+    verify_cmd: "systemctl status webmin"
+    offline_available: false
+
+  # ==========================================================================
+  # 监控/日志
+  # ==========================================================================
+  nagios:
+    type: apt
+    package: nagios3
+    verify_cmd: "nagios3 -v"
+    offline_available: true
+
+  nagios3:
+    type: apt
+    package: nagios3
+    verify_cmd: "nagios3 -v"
+    offline_available: true
+
+  zabbix-agent:
+    type: apt
+    package: zabbix-agent
+    verify_cmd: "zabbix_agentd --version"
+    offline_available: true
+
+  zabbix-server:
+    type: apt
+    package: zabbix-server-mysql
+    verify_cmd: "zabbix_server --version"
+    offline_available: true
+
+  rsyslog:
+    type: apt
+    package: rsyslog
+    verify_cmd: "rsyslogd -v"
+    offline_available: true
+
+  prometheus:
+    type: script
+    install_script: |
+      useradd -rs /bin/false prometheus
+      cd /tmp
+      wget https://github.com/prometheus/prometheus/releases/download/v2.45.0/prometheus-2.45.0.linux-amd64.tar.gz
+      tar xzf prometheus-2.45.0.linux-amd64.tar.gz
+      mv prometheus-2.45.0.linux-amd64 /opt/prometheus
+      chown -R prometheus:prometheus /opt/prometheus
+    verify_cmd: "/opt/prometheus/prometheus --version"
+    offline_available: false
+
+  grafana:
+    type: script
+    install_script: |
+      apt-get install -y apt-transport-https
+      wget -q -O /usr/share/keyrings/grafana.key https://apt.grafana.com/gpg.key
+      echo "deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com stable main" | tee /etc/apt/sources.list.d/grafana.list
+      apt-get update
+      apt-get install -y grafana
+    verify_cmd: "grafana-server -v"
+    offline_available: false
+
+  # ==========================================================================
+  # 系统工具
+  # ==========================================================================
+  curl:
+    type: apt
+    package: curl
+    verify_cmd: "curl --version"
+    offline_available: true
+
+  wget:
+    type: apt
+    package: wget
+    verify_cmd: "wget --version"
+    offline_available: true
+
+  git:
+    type: apt
+    package: git
+    verify_cmd: "git --version"
+    offline_available: true
+
+  vim:
+    type: apt
+    package: vim
+    verify_cmd: "vim --version"
+    offline_available: true
+
+  nano:
+    type: apt
+    package: nano
+    verify_cmd: "nano --version"
+    offline_available: true
+
+  htop:
+    type: apt
+    package: htop
+    verify_cmd: "htop --version"
+    offline_available: true
+
+  tmux:
+    type: apt
+    package: tmux
+    verify_cmd: "tmux -V"
+    offline_available: true
+
+  screen:
+    type: apt
+    package: screen
+    verify_cmd: "screen --version"
+    offline_available: true
+
+  net-tools:
+    type: apt
+    package: net-tools
+    verify_cmd: "ifconfig --version"
+    offline_available: true
+
+  iputils-ping:
+    type: apt
+    package: iputils-ping
+    verify_cmd: "ping -V"
+    offline_available: true
+
+  traceroute:
+    type: apt
+    package: traceroute
+    verify_cmd: "traceroute --version"
+    offline_available: true
+
+  dnsutils:
+    type: apt
+    package: dnsutils
+    verify_cmd: "dig -v"
+    offline_available: true
+
+  openssh-server:
+    type: apt
+    package: openssh-server
+    verify_cmd: "sshd -V"
+    offline_available: true
+
+  ssh:
+    type: apt
+    package: openssh-server
+    verify_cmd: "sshd -V"
+    offline_available: true
+
+  unzip:
+    type: apt
+    package: unzip
+    verify_cmd: "unzip -v"
+    offline_available: true
+
+  zip:
+    type: apt
+    package: zip
+    verify_cmd: "zip --version"
+    offline_available: true
+
+  tar:
+    type: apt
+    package: tar
+    verify_cmd: "tar --version"
+    offline_available: true
+
+  build-essential:
+    type: apt
+    package: build-essential
+    verify_cmd: "gcc --version"
+    offline_available: true
+
+  gcc:
+    type: apt
+    package: gcc
+    verify_cmd: "gcc --version"
+    offline_available: true
+
+  make:
+    type: apt
+    package: make
+    verify_cmd: "make --version"
+    offline_available: true
