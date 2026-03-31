@@ -1,248 +1,476 @@
+# CoGenius 
+
+**Cyber Range Configuration Generator ** - Automated Virtual Cyber Range Generation from Security Documents
 
 ---
 
-# Cyber Range CoGenius:LLM-Powered Multi-Agent Orchestration for fine-grainedend-to-endvirtual Scenario Generation
+## Overview
 
-## 📌 Overview
-Cyber ranges are essential infrastructure for cybersecurity training and research, designed to simulate complex and realistic network environments. However, creating, validating, and deploying cyber range scenarios is often time-consuming, error-prone, and costly.
+CoGenius  is the core backend service of an automated cyber range generation system. It extracts attack scenario information from security documents (such as CVE vulnerability reports in PDF format), generates VSDL (Virtual Security Description Language) scripts via LLM, compiles them into Terraform and Ansible code, and finally deploys complete virtual cyber range environments on OpenStack.
 
-This project provides an end-to-end execution platform for automating the generation of cyber ranges, powered by multi-agent collaboration. The system includes:
+### Core Workflow
 
-- A coordinated multi-agent architecture for generating scenario logic and automation scripts.
-
-- Supporting infrastructure such as:
-
-    -  vsdlc: a domain-specific compiler for scenario description.
-
-    - OpenStack: for dynamic deployment and resource orchestration.
-
-Our goal is to reduce the barrier to cyber range usage by automating scenario generation, infrastructure orchestration, and service deployment—making cybersecurity simulation more efficient, accessible, and intelligent.
-
-## 🚀 Getting Started with Docker Compose
-
-### 1. Prerequisites
-
-Before getting started, please install the following:
-
-* [Docker](https://docs.docker.com/get-docker/)
-* [Docker Compose](https://docs.docker.com/compose/install/)
-* [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+```
+PDF Vulnerability Report
+         │
+         ▼
+   [PDF-RE Service] ───► Markdown Text
+         │
+         ▼
+      [LLM API] ───► Structured Attack Scenario JSON
+         │
+         ▼
+   [LLM Agent] ───► VSDL Script
+         │
+         ▼
+[Python VSDL Compiler] ───► Terraform + Ansible Code
+         │
+         ▼
+     [OpenStack] ───► Virtual Cyber Range Environment
+```
 
 ---
 
-### 2. Clone the Repository
+## Key Components
+
+### 1. PDF Extraction Module (`app/services/pdf_extractor.py`)
+- Calls external **PDF-RE Service** to convert PDF to Markdown
+- Uses LLM to extract structured attack scenario information
+- Supports optional CVE database enrichment
+
+### 2. VSDL Generation Module (`app/services/case_service.py`) ⭐ Core Script
+- Uses LangChain + ReAct Agent to generate VSDL scripts
+- Integrates OpenStack dynamic constraints (minimum disk requirements for images, etc.)
+- Supports multi-round iteration to fix VSDL syntax errors
+
+### 3. Python VSDL Compiler (`app/services/vsdl_compiler/`)
+A custom VSDL compiler implemented entirely in Python. **No external JAR or Z3 Solver binary required.**
+
+| Module | Function |
+|--------|----------|
+| `parser.py` | VSDL syntax parsing → AST |
+| `validator.py` | SMT constraint validation |
+| `generator/terraform.py` | Terraform code generation |
+| `generator/ansible.py` | Ansible playbook generation |
+
+### 4. Task Queue System
+- **Celery + Redis** for asynchronous task processing
+- Supports parallel processing of multiple cyber range generation tasks
+- Automatically generates deployment reports and experiment results
+
+---
+
+## System Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        CoGenius                                │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                       │
+│   ┌────────────┐      ┌──────────┐      ┌────────────────┐           │
+│   │ Flask API  │─────►│  Celery  │─────►│  case_service  │           │
+│   │   :5000    │      │  Worker  │      │    (Core)      │           │
+│   └────────────┘      └──────────┘      └───────┬────────┘           │
+│                                                  │                    │
+│         ┌────────────────────────────────────────┼────────────────┐  │
+│         │                                        │                │  │
+│         ▼                                        ▼                │  │
+│   ┌───────────────┐                     ┌───────────────┐         │  │
+│   │ PDF Extractor │                     │ VSDL Compiler │         │  │
+│   │               │                     │   (Python)    │         │  │
+│   └───────────────┘                     └───────┬───────┘         │  │
+│         │                                       │                 │  │
+└─────────┼───────────────────────────────────────┼─────────────────┼──┘
+          │                                       │                 │
+          ▼                                       ▼                 ▼
+   ┌─────────────┐                        ┌─────────────┐    ┌────────────┐
+   │ PDF-RE      │                        │  OpenStack  │    │ Callback   │
+   │ Service     │                        │  Platform   │    │ Server     │
+   │ (External)  │                        │             │    │  :9999     │
+   └─────────────┘                        └─────────────┘    └────────────┘
+          │                                       │
+          ▼                                       ▼
+   ┌─────────────┐                        ┌─────────────┐
+   │    LLM      │                        │  Virtual    │
+   │    API      │                        │  Cyber Range│
+   └─────────────┘                        └─────────────┘
+```
+
+---
+
+## Prerequisites
+
+### Required External Services
+
+| Service | Purpose | Configuration |
+|---------|---------|---------------|
+| **OpenStack** | Virtual cyber range deployment | `OPENSTACK_URL`, `OPENSTACK_USER`, `OPENSTACK_PASSWORD` |
+| **Redis** | Celery task queue | `CELERY_BROKER_URL` |
+| **PDF-RE Service** | PDF to Markdown conversion | `PDF_RE_SERVICE_URL` |
+| **LLM API** | VSDL script generation | `LLM_API_URL`, `LLM_API_KEY` |
+
+### SSH Key Configuration (Required)
 
 ```bash
-git clone <repository-url>
+# Generate SSH key pair for OpenStack VM access
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/vsdl_key -N ""
+
+# Configure environment variables
+SSH_PUBKEY_PATH=/home/ubuntu/.ssh/id_rsa.pub
+SSH_PRIVATE_KEY_PATH=/home/ubuntu/.ssh/id_rsa
+```
+
+### Jumphost Configuration (Optional)
+
+If OpenStack VMs are located in internal network and require jumphost access:
+
+```bash
+JUMPHOST_HOST=<jumphost-ip>
+JUMPHOST_USER=<ssh-user>
+JUMPHOST_PORT=22
+JUMPHOST_PASSWORD=<ssh-password>
+```
+
+---
+
+## Installation
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/<your-username>/crcg_backend.git
 cd crcg_backend
 ```
 
----
-
-### 3. Prepare Required Directories
-
-Create necessary directories for NLTK data and model files:
+### 2. Create Virtual Environment
 
 ```bash
-mkdir -p nltk_data
-mkdir -p models
+python -m venv .venv
+source .venv/bin/activate  # Linux/Mac
+# or
+.\.venv\Scripts\activate   # Windows
 ```
 
-#### 3.1 Download Required Models (Optional but Recommended)
-
-For offline operation, download the YOLO model files:
+### 3. Install Dependencies
 
 ```bash
-# Install huggingface_hub
-pip install huggingface_hub
-
-# Download model files
-python -c "from huggingface_hub import hf_hub_download; hf_hub_download('unstructuredio/yolo_x_layout', 'yolox_l0.05.onnx', cache_dir='./models')"
+pip install -r requirements.txt
 ```
-
-This will create the required directory structure in the `models` folder.
-
----
 
 ### 4. Configure Environment Variables
 
-This project uses two environment variable files:
-
-1. **`.env`** - For business logic and application settings:
-   ```bash
-   cp .env.example .env
-   ```
-   Edit this file to configure business settings like API keys, service URLs, and application parameters.
-
-2. **`.env.docker`** - For container-specific settings:
-   ```bash
-   cp .env.example .env.docker
-   ```
-   Edit this file to configure container-specific settings like ports, volumes, and Docker networking options.
-
-Both files need to be properly configured for the system to work correctly.
-
----
-
-## ⚡ Quick Start
-
-### Run the Service
-
-1. Build and start the services:
-
-   ```bash
-   docker-compose up -d
-   ```
-
-2. Check the logs to ensure everything is running correctly:
-
-   ```bash
-   docker-compose logs -f
-   ```
-
-3. To stop the services:
-
-   ```bash
-   docker-compose down
-   ```
-
----
-
-## 🛠️ API Reference
-
-### Target Range Generation API
-
-#### Generate a Target Range Scenario
-
-* **Endpoint**: `POST http://127.0.0.1:5000/api/v1/target-range/generate`
-
-* **Content-Type**: `application/json`
-
-* **Request Body Parameters**:
-
-  | Parameter | Type | Required | Description |
-  |-----------|------|----------|-------------|
-  | `case_id` | integer | Yes | Unique identifier for the case |
-  | `file` | base64 | No | Base64 encoded file content (PDF format recommended) |
-  | `callback_url` | string | No | URL to receive processing result notifications |
-
-* **Example Requests**:
-
-  1. Generate using a case ID:
-     ```bash
-     curl -X POST -H "Content-Type: application/json" \
-     -d '{"case_id": 1}' \
-     http://127.0.0.1:5000/api/v1/target-range/generate
-     ```
-
-  2. Generate by uploading a file:
-     ```bash
-     curl -X POST -H "Content-Type: multipart/form-data" \
-     -F "file=@/path/to/scenario.pdf" \
-     -F "callback_url=http://yourserver.com/webhook" \
-     http://127.0.0.1:5000/api/v1/target-range/generate
-     ```
-
-* **Response Format**:
-
-  Success (200 OK):
-  ```json
-  {
-    "status": "success",
-    "task_id": "task-123456",
-    "message": "Scenario generation started"
-  }
-  ```
-
-  Error (400 Bad Request):
-  ```json
-  {
-    "status": "error",
-    "message": "Invalid request parameters"
-  }
-  ```
-
-* **Callback Notification Format**:
-  
-  When processing completes, a POST request will be sent to the callback_url (if provided):
-  ```json
-  {
-    "task_id": "task-123456",
-    "status": "completed",
-    "result": {
-      "vsdl_script": "// Generated VSDL Script content...",
-      "generation_time": 45.2
-    }
-  }
-  ```
-
-* **Notes**:
-  - Processing is asynchronous and may take several minutes
-  - If no callback_url is provided, check the status using the task_id
-
----
-
-## 📦 Docker Containers
-
-The system consists of three main containers:
-
-1. **Redis**: Message broker for Celery tasks
-2. **Web**: Flask web application serving the API endpoints
-3. **Worker**: Celery worker for processing background tasks
-
-You can check their status using:
+Create `.env` file from template:
 
 ```bash
-docker-compose ps
+cp .env.example .env
+```
+
+Edit `.env` with your configuration:
+
+```bash
+# LLM API Configuration
+LLM_API_URL=https://api.openai.com/v1
+LLM_API_KEY=<your-api-key>
+LLM_MODEL=gpt-4
+
+# OpenStack Configuration (REQUIRED)
+OPENSTACK_USER=<username>
+OPENSTACK_PASSWORD=<password>
+OPENSTACK_URL=<auth-url>
+OPENSTACK_TENANT_NAME=vsdl
+OPENSTACK_DOMAIN=Default
+
+# SSH Key Paths (REQUIRED)
+SSH_PUBKEY_PATH=/home/ubuntu/.ssh/id_rsa.pub
+SSH_PRIVATE_KEY_PATH=/home/ubuntu/.ssh/id_rsa
+
+# PDF-RE Service
+PDF_RE_SERVICE_URL=http://localhost:8000
+```
+
+### 5. Initialize Database
+
+```bash
+flask db upgrade
 ```
 
 ---
 
-## 🧪 Development Setup
+## Running the Application
 
-For development purposes, you might want to run the service locally:
+### Development Mode (Recommended)
 
-### Option 1: Using start_dev.sh Script (Recommended)
+The application requires **4 terminals** on the CRCG server:
 
-The easiest way to start the application in development mode is by using the provided script:
-
-```bash
-# Make the script executable
-chmod +x start_dev.sh
-
-# Run the development script
-./start_dev.sh
-```
-
-This script will automatically:
-- Set up the required environment
-- Start Redis if needed
-- Launch the Flask development server
-- Start the Celery worker
-- Configure all necessary settings
-
-### Option 2: Manual Setup with Conda
+#### Terminal 1: Main Service (Flask API)
 
 ```bash
-# Create Conda environment
-conda create -n crcg python=3.11
-conda activate crcg
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Install additional dependencies
-sudo apt-get update && sudo apt-get install -y tesseract-ocr tesseract-ocr-eng poppler-utils
-
-# Start Redis (required)
-docker-compose up -d redis
-
-# Run development server
+cd ~/CRCG/CRCG/crcg_backend
+source .venv/bin/activate
+source .env
 python run.py
+# Service runs on port 5000
 ```
 
-In a separate terminal:
+#### Terminal 2: Celery Worker (Critical)
+
 ```bash
-# Run Celery worker
-celery -A celery_worker.celery_app worker --loglevel=info
+cd ~/CRCG/CRCG/crcg_backend
+source .venv/bin/activate
+source .env
+HF_HOME=/home/appuser HF_HUB_CACHE=/home/appuser/models \
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_DATASETS_OFFLINE=1 \
+UNSTRUCTURED_LOCAL_INFERENCE=1 \
+celery -A celery_worker:celery_app worker -l info -n worker2@%h
+# Main progress logs appear in this terminal
 ```
+
+#### Terminal 3: Callback Receiver
+
+```bash
+cd ~/crcg_callback
+python callback_server.py
+# Runs on port 9999
+```
+
+#### Terminal 4: Test Client
+
+```bash
+cd ~/crcg_callback
+curl -X POST http://127.0.0.1:5000/api/v1/target-range/generate \
+  -F "file=@CVE-2022.pdf" \
+  -F "taskId=demo002" \
+  -F "callbackUrl=http://127.0.0.1:9999/callback"
+```
+
+### Docker Deployment
+
+```bash
+# Create .env.docker file
+cp .env .env.docker
+
+# Start services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f worker
+```
+
+---
+
+## API Reference
+
+### Generate Cyber Range
+
+```http
+POST /api/v1/target-range/generate
+Content-Type: multipart/form-data
+
+Parameters:
+- file: Scenario file (PDF)
+- taskId: Unique task ID
+- callbackUrl: Result callback URL
+
+Response: 202 Accepted
+{
+  "message": "Target generation task accepted.",
+  "taskId": "xxx"
+}
+```
+
+### Health Check
+
+```http
+GET /api/v1/health
+
+Response: 200 OK
+{
+  "status": "healthy"
+}
+```
+
+### API Documentation
+
+Access Swagger UI at: `http://localhost:5000/api/docs/`
+
+---
+
+## VSDL Language Example
+
+```vsdl
+scenario cve_2022_44228 duration 10 {
+  // External network
+  network external_net {
+    addresses range is 203.0.113.0/24;
+    gateway has direct access to the Internet;
+  }
+
+  // Internal network
+  network internal_net {
+    addresses range is 192.168.1.0/24;
+  }
+
+  // Attacker node
+  node attacker {
+    ram equal to 4GB;
+    disk size equal to 50GB;
+    vcpu equal to 2;
+    node OS is "kali";
+  }
+
+  // Victim node
+  node victim {
+    ram equal to 8GB;
+    disk size equal to 80GB;
+    vcpu equal to 4;
+    node OS is "ubuntu20";
+    mounts software "log4j" version "2.14.1";
+  }
+
+  // Network connections
+  network external_net {
+    node attacker is connected;
+    node attacker has IP 203.0.113.100;
+  }
+
+  network internal_net {
+    node victim is connected;
+    node victim has IP 192.168.1.10;
+  }
+
+  // Vulnerability definition
+  vulnerability log4j_rce {
+    cve id is "CVE-2022-44228";
+    hosted on node victim;
+    vulnerable software "log4j" version "2.14.1";
+  }
+}
+```
+
+---
+
+## Project Structure
+
+```
+crcg_backend/
+├── app/
+│   ├── __init__.py              # Flask application factory
+│   ├── config.py                # Configuration management
+│   ├── tasks.py                 # Celery task definitions
+│   ├── routes/
+│   │   ├── main.py              # Main routes
+│   │   └── target_range.py      # Cyber range generation API
+│   ├── services/
+│   │   ├── case_service.py      # ⭐ Core service script
+│   │   ├── pdf_extractor.py     # PDF extraction module
+│   │   ├── openstack_service.py # OpenStack connection service
+│   │   └── vsdl_compiler/       # Python VSDL Compiler
+│   │       ├── parser.py        # Syntax parser
+│   │       ├── validator.py     # SMT validator
+│   │       ├── compiler.py      # Main compiler
+│   │       └── generator/
+│   │           ├── terraform.py # Terraform generator
+│   │           └── ansible.py   # Ansible generator
+│   └── utils/
+│       ├── logger.py
+│       ├── callbacks.py
+│       └── response.py
+├── tools/
+│   ├── terraform                # Terraform binary
+│   └── ansible-playbook         # Ansible binary
+├── data/                        # Runtime data directory
+│   ├── vsdl_scripts/
+│   ├── terraform_scripts/
+│   ├── ansible_scripts/
+│   └── scenario_outputs/
+├── celery_worker.py             # Celery worker entry point
+├── run.py                       # Flask entry point
+├── requirements.txt             # Python dependencies
+├── docker-compose.yml           # Docker compose configuration
+├── Dockerfile                   # Docker image definition
+├── .env.example                 # Environment template
+└── README.md                    # This file
+```
+
+---
+
+## FAQ
+
+### Q1: Celery Worker cannot connect to Redis
+
+Check if Redis service is running:
+```bash
+redis-cli ping  # Should return PONG
+```
+
+### Q2: OpenStack connection fails
+
+Verify configuration:
+```bash
+openstack --os-auth-url $OPENSTACK_URL \
+           --os-username $OPENSTACK_USER \
+           --os-password $OPENSTACK_PASSWORD \
+           --os-project-name $OPENSTACK_TENANT_NAME \
+           server list
+```
+
+### Q3: PDF parsing timeout
+
+PDF-RE service requires GPU for OCR mode. Ensure service is running:
+```bash
+curl http://localhost:8000/health
+```
+
+### Q4: SSH connection fails
+
+Verify SSH key configuration:
+```bash
+ssh -i $SSH_PRIVATE_KEY_PATH user@vm-ip
+```
+
+---
+
+## Technology Stack
+
+| Category | Technology |
+|----------|------------|
+| Web Framework | Flask 2.2.5 |
+| Task Queue | Celery 5.4.0 + Redis |
+| LLM | LangChain + OpenAI-compatible API |
+| Infrastructure | Terraform + OpenStack |
+| Configuration Management | Ansible |
+| Database | SQLite (dev) / MySQL (production) |
+| API Documentation | Flasgger (Swagger) |
+| VSDL Compiler | Custom Python implementation |
+
+---
+
+## Important Notes
+
+1. **VSDL Compiler**: This project uses a custom Python-based VSDL compiler (`app/services/vsdl_compiler/`). External tools like `vsdlc.jar` or `z3` binary are **NOT** required.
+
+2. **LLM API**: The project uses OpenAI-compatible API endpoints. You can use OpenAI, DeepSeek, or any compatible service.
+
+3. **PDF-RE Service**: This is an external service for PDF parsing. You need to set up this service separately or configure an existing one.
+
+4. **OpenStack**: A working OpenStack environment is **required** for actual deployment. For testing without OpenStack, the system can still generate Terraform/Ansible artifacts.
+
+5. **Offline Mode**: The project supports offline mode for HuggingFace models via environment variables, but uses online LLM APIs.
+
+---
+
+## License
+
+MIT License
+
+---
+
+## Contributing
+
+Issues and Pull Requests are welcome!
+
+---
+
+## Contact
+
+For questions, please use GitHub Issues.

@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__ida-pro-mcp__check_connection"
+    ]
+  }
+}

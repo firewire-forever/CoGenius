@@ -28,10 +28,10 @@ from flask import current_app
 # PDF-RE Service Configuration
 PDF_RE_SERVICE_URL = os.environ.get('PDF_RE_SERVICE_URL', 'http://localhost:8000')
 
-# SiliconFlow API for PDF extraction (写死配置，使用 DeepSeek-R1 推理模型)
-API_URL = "https://api.siliconflow.cn/v1/chat/completions"
-API_KEY = "sk-mjdncqkguytqrzqbxraimduvyfmvfpsqeriluapnzynrptmo"
-MODEL_NAME = "deepseek-ai/DeepSeek-R1"
+# LLM API Configuration for PDF extraction (loaded from environment variables)
+API_URL = os.environ.get('PDF_LLM_API_URL', 'https://api.openai.com/v1/chat/completions')
+API_KEY = os.environ.get('PDF_LLM_API_KEY', '')
+MODEL_NAME = os.environ.get('PDF_LLM_MODEL', 'gpt-4')
 
 # CVE Database Configuration (from environment variables)
 CVE_DB_PATH = os.environ.get('CVE_DB_PATH', 'data/cve_db/cves')  # CVE 数据库根目录

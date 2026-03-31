@@ -1,8 +1,57 @@
 # Python cache files
 __pycache__/
-logs/
 *.py[cod]
-data/
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# Environment variables
 .env
+.env.docker
+.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# Data directories
+data/
 nltk_data/
 models/
+
+# Database
+*.db
+instance/
+
+# Temporary files
+*.tmp
+*.temp
+fix_*.py
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Legacy requirements backups
+requirements.*.txt
