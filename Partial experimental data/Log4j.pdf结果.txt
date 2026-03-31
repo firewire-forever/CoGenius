@@ -1,0 +1,307 @@
+2026-03-24 19:16:11,052 - pdf_parser - INFO - [PDF_PARSER] Trying backend: marker
+2026-03-24 19:16:11,052 - pdf_parser - INFO - [MARKER] Starting high-quality PDF parsing...
+Recognizing Layout: 100%|██████████████████████████████████████████████████████████████| 15/15 [00:02<00:00,  6.73it/s]
+Running OCR Error Detection: 100%|██████████████████████████████████████████████████████| 2/2 [00:00<00:00, 214.92it/s]
+Detecting bboxes: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:04<00:00,  2.26s/it]
+Recognizing Text: 100%|██████████████████████████████████████████████████████████████| 141/141 [00:12<00:00, 11.56it/s]
+Detecting bboxes: 0it [00:00, ?it/s]
+2026-03-24 19:16:35,109 - pdf_parser - INFO - [MARKER] Successfully parsed PDF, 4835 chars, 0 pages
+2026-03-24 19:16:35,122 - pdf_parser - INFO - [PDF_PARSER] Successfully parsed with marker
+
+
+
+
+PLAY RECAP *********************************************************************
+AttackerMachine            : ok=48   changed=7    unreachable=0    failed=0    skipped=5    rescued=0    ignored=4   
+VulnerableServer           : ok=31   changed=8    unreachable=0    failed=0    skipped=3    rescued=0    ignored=6   
+
+
+[2026-03-24 19:42:01,606] None - None None
+INFO in tasks: [demo002] Ansible configuration successful: /tmp/tmp8bfnuxac/ansible
+[2026-03-24 19:42:01,606: INFO/ForkPoolWorker-15] [demo002] Ansible configuration successful: /tmp/tmp8bfnuxac/ansible
+[2026-03-24 19:42:01,616] None - None None
+INFO in tasks: [demo002] Artifacts zipped successfully to: /tmp/tmp8bfnuxac.zip
+[2026-03-24 19:42:01,616: INFO/ForkPoolWorker-15] [demo002] Artifacts zipped successfully to: /tmp/tmp8bfnuxac.zip
+[2026-03-24 19:42:01,621] None - None None
+INFO in callbacks: Successfully sent callback for task demo002 to http://127.0.0.1:9999/callback. Status: SUCCESS
+[2026-03-24 19:42:01,621: INFO/ForkPoolWorker-15] Successfully sent callback for task demo002 to http://127.0.0.1:9999/callback. Status: SUCCESS
+[2026-03-24 19:42:01,621] None - None None
+INFO in tasks: [demo002] Successfully sent success callback to http://127.0.0.1:9999/callback.
+[2026-03-24 19:42:01,621: INFO/ForkPoolWorker-15] [demo002] Successfully sent success callback to http://127.0.0.1:9999/callback.
+[2026-03-24 19:42:01,622] None - None None
+INFO in tasks: 
+[2026-03-24 19:42:01,622: INFO/ForkPoolWorker-15] 
+[2026-03-24 19:42:01,622] None - None None
+INFO in tasks: ╔══════════════════════════════════════════════════════════════════════════════╗
+[2026-03-24 19:42:01,622: INFO/ForkPoolWorker-15] ╔══════════════════════════════════════════════════════════════════════════════╗
+[2026-03-24 19:42:01,622] None - None None
+INFO in tasks: ║═════════════════════════════════ VSDL 部署报告 ══════════════════════════════════║
+[2026-03-24 19:42:01,622: INFO/ForkPoolWorker-15] ║═════════════════════════════════ VSDL 部署报告 ══════════════════════════════════║
+[2026-03-24 19:42:01,622] None - None None
+INFO in tasks: ╚══════════════════════════════════════════════════════════════════════════════╝
+[2026-03-24 19:42:01,622: INFO/ForkPoolWorker-15] ╚══════════════════════════════════════════════════════════════════════════════╝
+[2026-03-24 19:42:01,622] None - None None
+INFO in tasks: 
+[2026-03-24 19:42:01,622: INFO/ForkPoolWorker-15] 
+[2026-03-24 19:42:01,622] None - None None
+INFO in tasks: ┌────────────────────────────────────── 基本信息 ─────────────────────────────┐
+[2026-03-24 19:42:01,622: INFO/ForkPoolWorker-15] ┌────────────────────────────────────── 基本信息 ─────────────────────────────┐
+[2026-03-24 19:42:01,622] None - None None
+INFO in tasks: │ 任务 ID:     demo002
+[2026-03-24 19:42:01,622: INFO/ForkPoolWorker-15] │ 任务 ID:     demo002
+[2026-03-24 19:42:01,622] None - None None
+INFO in tasks: │ 场景名称:    log4j2_attack_scenario
+[2026-03-24 19:42:01,622: INFO/ForkPoolWorker-15] │ 场景名称:    log4j2_attack_scenario
+[2026-03-24 19:42:01,623] None - None None
+INFO in tasks: │ 场景时长:    5 TTU
+[2026-03-24 19:42:01,623: INFO/ForkPoolWorker-15] │ 场景时长:    5 TTU
+[2026-03-24 19:42:01,623] None - None None
+INFO in tasks: │ 总耗时:      1561.1 秒 (26.0 分钟)
+[2026-03-24 19:42:01,623: INFO/ForkPoolWorker-15] │ 总耗时:      1561.1 秒 (26.0 分钟)
+[2026-03-24 19:42:01,623] None - None None
+INFO in tasks: │ 完成时间:    2026-03-24 19:42:01
+[2026-03-24 19:42:01,623: INFO/ForkPoolWorker-15] │ 完成时间:    2026-03-24 19:42:01
+[2026-03-24 19:42:01,623] None - None None
+INFO in tasks: └──────────────────────────────────────────────────────────────────────────────┘
+[2026-03-24 19:42:01,623: INFO/ForkPoolWorker-15] └──────────────────────────────────────────────────────────────────────────────┘
+[2026-03-24 19:42:01,623] None - None None
+INFO in tasks: 
+[2026-03-24 19:42:01,623: INFO/ForkPoolWorker-15] 
+[2026-03-24 19:42:01,623] None - None None
+INFO in tasks: ┌──────────────────────────────── 部署状态总览 ────────────────────────────────┐
+[2026-03-24 19:42:01,623: INFO/ForkPoolWorker-15] ┌──────────────────────────────── 部署状态总览 ────────────────────────────────┐
+[2026-03-24 19:42:01,623] None - None None
+INFO in tasks: │ Terraform 部署:  ✅ 成功
+[2026-03-24 19:42:01,623: INFO/ForkPoolWorker-15] │ Terraform 部署:  ✅ 成功
+[2026-03-24 19:42:01,624] None - None None
+INFO in tasks: │ Ansible 配置:    ✅ 成功
+[2026-03-24 19:42:01,624: INFO/ForkPoolWorker-15] │ Ansible 配置:    ✅ 成功
+[2026-03-24 19:42:01,624] None - None None
+INFO in tasks: │ 总体状态:        ✅ 成功
+[2026-03-24 19:42:01,624: INFO/ForkPoolWorker-15] │ 总体状态:        ✅ 成功
+[2026-03-24 19:42:01,624] None - None None
+INFO in tasks: └──────────────────────────────────────────────────────────────────────────────┘
+[2026-03-24 19:42:01,624: INFO/ForkPoolWorker-15] └──────────────────────────────────────────────────────────────────────────────┘
+[2026-03-24 19:42:01,624] None - None None
+INFO in tasks: 
+[2026-03-24 19:42:01,624: INFO/ForkPoolWorker-15] 
+[2026-03-24 19:42:01,624] None - None None
+INFO in tasks: ┌───────────────────────────────── 网络拓扑 ───────────────────────────────────┐
+[2026-03-24 19:42:01,624: INFO/ForkPoolWorker-15] ┌───────────────────────────────── 网络拓扑 ───────────────────────────────────┐
+[2026-03-24 19:42:01,624] None - None None
+INFO in tasks: │
+[2026-03-24 19:42:01,624: INFO/ForkPoolWorker-15] │
+[2026-03-24 19:42:01,625] None - None None
+INFO in tasks: │ 🌐 网络: network1
+[2026-03-24 19:42:01,625: INFO/ForkPoolWorker-15] │ 🌐 网络: network1
+[2026-03-24 19:42:01,625] None - None None
+INFO in tasks: │    地址范围: 203.0.113.0/24
+[2026-03-24 19:42:01,625: INFO/ForkPoolWorker-15] │    地址范围: 203.0.113.0/24
+[2026-03-24 19:42:01,625] None - None None
+INFO in tasks: │    网关:     是
+[2026-03-24 19:42:01,625: INFO/ForkPoolWorker-15] │    网关:     是
+[2026-03-24 19:42:01,625] None - None None
+INFO in tasks: │    连接节点:
+[2026-03-24 19:42:01,625: INFO/ForkPoolWorker-15] │    连接节点:
+[2026-03-24 19:42:01,625] None - None None
+INFO in tasks: │       • AttackerMachine (203.0.113.10)
+[2026-03-24 19:42:01,625: INFO/ForkPoolWorker-15] │       • AttackerMachine (203.0.113.10)
+[2026-03-24 19:42:01,625] None - None None
+INFO in tasks: │       • network2 (203.0.113.254)
+[2026-03-24 19:42:01,625: INFO/ForkPoolWorker-15] │       • network2 (203.0.113.254)
+[2026-03-24 19:42:01,625] None - None None
+INFO in tasks: │
+[2026-03-24 19:42:01,625: INFO/ForkPoolWorker-15] │
+[2026-03-24 19:42:01,626] None - None None
+INFO in tasks: │ 🌐 网络: network2
+[2026-03-24 19:42:01,626: INFO/ForkPoolWorker-15] │ 🌐 网络: network2
+[2026-03-24 19:42:01,626] None - None None
+INFO in tasks: │    地址范围: 172.16.1.0/24
+[2026-03-24 19:42:01,626: INFO/ForkPoolWorker-15] │    地址范围: 172.16.1.0/24
+[2026-03-24 19:42:01,626] None - None None
+INFO in tasks: │    网关:     否
+[2026-03-24 19:42:01,626: INFO/ForkPoolWorker-15] │    网关:     否
+[2026-03-24 19:42:01,626] None - None None
+INFO in tasks: │    连接节点:
+[2026-03-24 19:42:01,626: INFO/ForkPoolWorker-15] │    连接节点:
+[2026-03-24 19:42:01,626] None - None None
+INFO in tasks: │       • network1 (172.16.1.254)
+[2026-03-24 19:42:01,626: INFO/ForkPoolWorker-15] │       • network1 (172.16.1.254)
+[2026-03-24 19:42:01,626] None - None None
+INFO in tasks: │       • VulnerableServer (172.16.1.100)
+[2026-03-24 19:42:01,626: INFO/ForkPoolWorker-15] │       • VulnerableServer (172.16.1.100)
+[2026-03-24 19:42:01,626] None - None None
+INFO in tasks: │
+[2026-03-24 19:42:01,626: INFO/ForkPoolWorker-15] │
+[2026-03-24 19:42:01,627] None - None None
+INFO in tasks: └──────────────────────────────────────────────────────────────────────────────┘
+[2026-03-24 19:42:01,627: INFO/ForkPoolWorker-15] └──────────────────────────────────────────────────────────────────────────────┘
+[2026-03-24 19:42:01,627] None - None None
+INFO in tasks: 
+[2026-03-24 19:42:01,627: INFO/ForkPoolWorker-15] 
+[2026-03-24 19:42:01,627] None - None None
+INFO in tasks: ┌─────────────────────────────── 虚拟机节点 ──────────────────────────────────┐
+[2026-03-24 19:42:01,627: INFO/ForkPoolWorker-15] ┌─────────────────────────────── 虚拟机节点 ──────────────────────────────────┐
+[2026-03-24 19:42:01,627] None - None None
+INFO in tasks: │
+[2026-03-24 19:42:01,627: INFO/ForkPoolWorker-15] │
+[2026-03-24 19:42:01,627] None - None None
+INFO in tasks: │ 🖥️  节点: AttackerMachine
+[2026-03-24 19:42:01,627: INFO/ForkPoolWorker-15] │ 🖥️  节点: AttackerMachine
+[2026-03-24 19:42:01,627] None - None None
+INFO in tasks: │    操作系统: kali
+[2026-03-24 19:42:01,627: INFO/ForkPoolWorker-15] │    操作系统: kali
+[2026-03-24 19:42:01,627] None - None None
+INFO in tasks: │    CPU:      2 vCPU
+[2026-03-24 19:42:01,627: INFO/ForkPoolWorker-15] │    CPU:      2 vCPU
+[2026-03-24 19:42:01,627] None - None None
+INFO in tasks: │    内存:     larger than 4 GB
+[2026-03-24 19:42:01,627: INFO/ForkPoolWorker-15] │    内存:     larger than 4 GB
+[2026-03-24 19:42:01,628] None - None None
+INFO in tasks: │    磁盘:     equal to 160 GB
+[2026-03-24 19:42:01,628: INFO/ForkPoolWorker-15] │    磁盘:     equal to 160 GB
+[2026-03-24 19:42:01,628] None - None None
+INFO in tasks: │    浮动 IP:  N/A
+[2026-03-24 19:42:01,628: INFO/ForkPoolWorker-15] │    浮动 IP:  N/A
+[2026-03-24 19:42:01,628] None - None None
+INFO in tasks: │    内网 IP:  N/A
+[2026-03-24 19:42:01,628: INFO/ForkPoolWorker-15] │    内网 IP:  N/A
+[2026-03-24 19:42:01,628] None - None None
+INFO in tasks: │    软件:
+[2026-03-24 19:42:01,628: INFO/ForkPoolWorker-15] │    软件:
+[2026-03-24 19:42:01,628] None - None None
+INFO in tasks: │       ✅ nmap
+[2026-03-24 19:42:01,628: INFO/ForkPoolWorker-15] │       ✅ nmap
+[2026-03-24 19:42:01,628] None - None None
+INFO in tasks: │       ✅ curl
+[2026-03-24 19:42:01,628: INFO/ForkPoolWorker-15] │       ✅ curl
+[2026-03-24 19:42:01,629] None - None None
+INFO in tasks: │       ✅ python3
+[2026-03-24 19:42:01,629: INFO/ForkPoolWorker-15] │       ✅ python3
+[2026-03-24 19:42:01,629] None - None None
+INFO in tasks: │       ✅ jndiexploit
+[2026-03-24 19:42:01,629: INFO/ForkPoolWorker-15] │       ✅ jndiexploit
+[2026-03-24 19:42:01,629] None - None None
+INFO in tasks: │
+[2026-03-24 19:42:01,629: INFO/ForkPoolWorker-15] │
+[2026-03-24 19:42:01,629] None - None None
+INFO in tasks: │ 🖥️  节点: VulnerableServer
+[2026-03-24 19:42:01,629: INFO/ForkPoolWorker-15] │ 🖥️  节点: VulnerableServer
+[2026-03-24 19:42:01,629] None - None None
+INFO in tasks: │    操作系统: ubuntu20
+[2026-03-24 19:42:01,629: INFO/ForkPoolWorker-15] │    操作系统: ubuntu20
+[2026-03-24 19:42:01,629] None - None None
+INFO in tasks: │    CPU:      4 vCPU
+[2026-03-24 19:42:01,629: INFO/ForkPoolWorker-15] │    CPU:      4 vCPU
+[2026-03-24 19:42:01,629] None - None None
+INFO in tasks: │    内存:     larger than 8 GB
+[2026-03-24 19:42:01,629: INFO/ForkPoolWorker-15] │    内存:     larger than 8 GB
+[2026-03-24 19:42:01,630] None - None None
+INFO in tasks: │    磁盘:     equal to 50 GB
+[2026-03-24 19:42:01,630: INFO/ForkPoolWorker-15] │    磁盘:     equal to 50 GB
+[2026-03-24 19:42:01,630] None - None None
+INFO in tasks: │    浮动 IP:  N/A
+[2026-03-24 19:42:01,630: INFO/ForkPoolWorker-15] │    浮动 IP:  N/A
+[2026-03-24 19:42:01,630] None - None None
+INFO in tasks: │    内网 IP:  N/A
+[2026-03-24 19:42:01,630: INFO/ForkPoolWorker-15] │    内网 IP:  N/A
+[2026-03-24 19:42:01,630] None - None None
+INFO in tasks: │    软件:
+[2026-03-24 19:42:01,630: INFO/ForkPoolWorker-15] │    软件:
+[2026-03-24 19:42:01,630] None - None None
+INFO in tasks: │       ✅ apache-log4j2 v2.14.1
+[2026-03-24 19:42:01,630: INFO/ForkPoolWorker-15] │       ✅ apache-log4j2 v2.14.1
+[2026-03-24 19:42:01,630] None - None None
+INFO in tasks: │       ✅ openjdk-11-jdk
+[2026-03-24 19:42:01,630: INFO/ForkPoolWorker-15] │       ✅ openjdk-11-jdk
+[2026-03-24 19:42:01,630] None - None None
+INFO in tasks: │
+[2026-03-24 19:42:01,630: INFO/ForkPoolWorker-15] │
+[2026-03-24 19:42:01,630] None - None None
+INFO in tasks: └──────────────────────────────────────────────────────────────────────────────┘
+[2026-03-24 19:42:01,630: INFO/ForkPoolWorker-15] └──────────────────────────────────────────────────────────────────────────────┘
+[2026-03-24 19:42:01,631] None - None None
+INFO in tasks: 
+[2026-03-24 19:42:01,631: INFO/ForkPoolWorker-15] 
+[2026-03-24 19:42:01,631] None - None None
+INFO in tasks: ┌─────────────────────────────── 漏洞信息 ────────────────────────────────────┐
+[2026-03-24 19:42:01,631: INFO/ForkPoolWorker-15] ┌─────────────────────────────── 漏洞信息 ────────────────────────────────────┐
+[2026-03-24 19:42:01,631] None - None None
+INFO in tasks: │
+[2026-03-24 19:42:01,631: INFO/ForkPoolWorker-15] │
+[2026-03-24 19:42:01,631] None - None None
+INFO in tasks: │ 🔓 漏洞: Log4Shell_CVE_2021_44832
+[2026-03-24 19:42:01,631: INFO/ForkPoolWorker-15] │ 🔓 漏洞: Log4Shell_CVE_2021_44832
+[2026-03-24 19:42:01,631] None - None None
+INFO in tasks: │    CVE:           CVE-2021-44832
+[2026-03-24 19:42:01,631: INFO/ForkPoolWorker-15] │    CVE:           CVE-2021-44832
+[2026-03-24 19:42:01,631] None - None None
+INFO in tasks: │    受影响软件:    apache-log4j2 2.14.1
+[2026-03-24 19:42:01,631: INFO/ForkPoolWorker-15] │    受影响软件:    apache-log4j2 2.14.1
+[2026-03-24 19:42:01,631] None - None None
+INFO in tasks: │    托管节点:      VulnerableServer
+[2026-03-24 19:42:01,631: INFO/ForkPoolWorker-15] │    托管节点:      VulnerableServer
+[2026-03-24 19:42:01,631] None - None None
+INFO in tasks: │
+[2026-03-24 19:42:01,631: INFO/ForkPoolWorker-15] │
+[2026-03-24 19:42:01,631] None - None None
+INFO in tasks: │ 🔓 漏洞: JNDI_Exploitation_Tool
+[2026-03-24 19:42:01,631: INFO/ForkPoolWorker-15] │ 🔓 漏洞: JNDI_Exploitation_Tool
+[2026-03-24 19:42:01,632] None - None None
+INFO in tasks: │    受影响软件:    jndiexploit
+[2026-03-24 19:42:01,632: INFO/ForkPoolWorker-15] │    受影响软件:    jndiexploit
+[2026-03-24 19:42:01,632] None - None None
+INFO in tasks: │    托管节点:      AttackerMachine
+[2026-03-24 19:42:01,632: INFO/ForkPoolWorker-15] │    托管节点:      AttackerMachine
+[2026-03-24 19:42:01,632] None - None None
+INFO in tasks: │    触发漏洞:      Log4Shell_CVE_2021_44832
+[2026-03-24 19:42:01,632: INFO/ForkPoolWorker-15] │    触发漏洞:      Log4Shell_CVE_2021_44832
+[2026-03-24 19:42:01,632] None - None None
+INFO in tasks: │
+[2026-03-24 19:42:01,632: INFO/ForkPoolWorker-15] │
+[2026-03-24 19:42:01,632] None - None None
+INFO in tasks: └──────────────────────────────────────────────────────────────────────────────┘
+[2026-03-24 19:42:01,632: INFO/ForkPoolWorker-15] └──────────────────────────────────────────────────────────────────────────────┘
+[2026-03-24 19:42:01,632] None - None None
+INFO in tasks: 
+[2026-03-24 19:42:01,632: INFO/ForkPoolWorker-15] 
+[2026-03-24 19:42:01,632] None - None None
+INFO in tasks: ╔══════════════════════════════════════════════════════════════════════════════╗
+[2026-03-24 19:42:01,632: INFO/ForkPoolWorker-15] ╔══════════════════════════════════════════════════════════════════════════════╗
+[2026-03-24 19:42:01,632] None - None None
+INFO in tasks: ║════════════════════════════════════ 部署完成 ════════════════════════════════════║
+[2026-03-24 19:42:01,632: INFO/ForkPoolWorker-15] ║════════════════════════════════════ 部署完成 ════════════════════════════════════║
+[2026-03-24 19:42:01,632] None - None None
+INFO in tasks: ╚══════════════════════════════════════════════════════════════════════════════╝
+[2026-03-24 19:42:01,632: INFO/ForkPoolWorker-15] ╚══════════════════════════════════════════════════════════════════════════════╝
+[2026-03-24 19:42:01,633] None - None None
+INFO in tasks: 
+[2026-03-24 19:42:01,633: INFO/ForkPoolWorker-15] 
+[2026-03-24 19:42:01,633] None - None None
+INFO in tasks: [demo002] Saving scenario output to: data/scenario_outputs/demo002
+[2026-03-24 19:42:01,633: INFO/ForkPoolWorker-15] [demo002] Saving scenario output to: data/scenario_outputs/demo002
+[2026-03-24 19:42:01,633] None - None None
+INFO in tasks: [demo002] Saved VSDL script to: data/scenario_outputs/demo002/vsdl_script.vsdl
+[2026-03-24 19:42:01,633: INFO/ForkPoolWorker-15] [demo002] Saved VSDL script to: data/scenario_outputs/demo002/vsdl_script.vsdl
+[2026-03-24 19:42:01,633] None - None None
+INFO in tasks: [demo002] Saved metadata to: data/scenario_outputs/demo002/metadata.json
+[2026-03-24 19:42:01,633: INFO/ForkPoolWorker-15] [demo002] Saved metadata to: data/scenario_outputs/demo002/metadata.json
+[2026-03-24 19:42:01,634] None - None None
+INFO in tasks: [demo002] Saved deployment report to: data/scenario_outputs/demo002/deployment_report.txt
+[2026-03-24 19:42:01,634: INFO/ForkPoolWorker-15] [demo002] Saved deployment report to: data/scenario_outputs/demo002/deployment_report.txt
+[2026-03-24 19:42:01,634] None - None None
+INFO in tasks: [demo002] Saved Terraform output to: data/scenario_outputs/demo002/terraform_output.json
+[2026-03-24 19:42:01,634: INFO/ForkPoolWorker-15] [demo002] Saved Terraform output to: data/scenario_outputs/demo002/terraform_output.json
+[2026-03-24 19:42:01,635] None - None None
+ERROR in tasks: [demo002] Failed to save scenario output: [Errno 17] File exists: 'data/scenario_outputs/demo002/terraform'
+[2026-03-24 19:42:01,635: ERROR/ForkPoolWorker-15] [demo002] Failed to save scenario output: [Errno 17] File exists: 'data/scenario_outputs/demo002/terraform'
+[2026-03-24 19:42:01,635] None - None None
+INFO in tasks: [demo002] Cleaned up input file: /tmp/crcg_uploads/demo002_1774350960_Log4j.pdf
+[2026-03-24 19:42:01,635: INFO/ForkPoolWorker-15] [demo002] Cleaned up input file: /tmp/crcg_uploads/demo002_1774350960_Log4j.pdf
+[2026-03-24 19:42:01,638] None - None None
+INFO in tasks: [demo002] Cleaned up output directory: /tmp/tmp8bfnuxac
+[2026-03-24 19:42:01,638: INFO/ForkPoolWorker-15] [demo002] Cleaned up output directory: /tmp/tmp8bfnuxac
+[2026-03-24 19:42:01,638] None - None None
+INFO in tasks: [demo002] Cleaned up zip file: /tmp/tmp8bfnuxac.zip
+[2026-03-24 19:42:01,638: INFO/ForkPoolWorker-15] [demo002] Cleaned up zip file: /tmp/tmp8bfnuxac.zip
+[2026-03-24 19:42:01,638: INFO/ForkPoolWorker-15] Task app.tasks.process_scenario_file_task[demo002] succeeded in 1561.0698056248948s: None
