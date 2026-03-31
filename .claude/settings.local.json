@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "mcp__ida-pro-mcp__check_connection"
+      "mcp__ida-pro-mcp__check_connection",
+      "Bash(python code/analyze_results.py)"
     ]
   }
 }

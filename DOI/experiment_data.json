@@ -1,0 +1,182 @@
+{
+  "summary": {
+    "total_experiments": 7,
+    "successful_deployments": 5,
+    "success_rate": 0.7142857142857143,
+    "avg_end_to_end_latency_seconds": 1409.01,
+    "avg_iac_build_time_seconds": 315.06,
+    "total_networks": 15,
+    "total_nodes": 17,
+    "total_vulnerabilities": 25
+  },
+  "experiments": [
+    {
+      "pdf_name": "demo003_1774420773_2020_Actors Still Exploiting SharePoint Vulnerability to Attack Middle East Government Organizations.pdf",
+      "task_id": "demo003",
+      "timestamp": "2026-03-25 15:03:46",
+      "success": false,
+      "terraform_success": true,
+      "ansible_success": false,
+      "timing": {
+        "end_to_end_latency": 1452.69,
+        "iac_build_time": 293.1,
+        "pdf_extraction": 0.0,
+        "vsdl_generation": 292.93,
+        "vsdl_compilation": 0.17,
+        "terraform": 37.98,
+        "ansible": 1111.36
+      },
+      "scenario": {
+        "name": "cloud_based_apt_attack",
+        "duration": 5,
+        "networks": 2,
+        "nodes": 2,
+        "vulnerabilities": 3
+      }
+    },
+    {
+      "pdf_name": "demo015_1774433812_2021_BrunHilda_DaaS.pdf",
+      "task_id": "demo015",
+      "timestamp": "2026-03-25 18:30:18",
+      "success": true,
+      "terraform_success": true,
+      "ansible_success": true,
+      "timing": {
+        "end_to_end_latency": 806.08,
+        "iac_build_time": 405.75,
+        "pdf_extraction": 0.0,
+        "vsdl_generation": 405.58,
+        "vsdl_compilation": 0.16,
+        "terraform": 44.35,
+        "ansible": 345.78
+      },
+      "scenario": {
+        "name": "brunhilda_android_attack",
+        "duration": 5,
+        "networks": 2,
+        "nodes": 2,
+        "vulnerabilities": 3
+      }
+    },
+    {
+      "pdf_name": "demo016_1774422800_2021_nao-sec.org-Royal Road ReDive.pdf",
+      "task_id": "demo016",
+      "timestamp": "2026-03-25 15:43:07",
+      "success": true,
+      "terraform_success": true,
+      "ansible_success": true,
+      "timing": {
+        "end_to_end_latency": 1787.09,
+        "iac_build_time": 308.16,
+        "pdf_extraction": 0.0,
+        "vsdl_generation": 307.97,
+        "vsdl_compilation": 0.18,
+        "terraform": 36.68,
+        "ansible": 1432.0
+      },
+      "scenario": {
+        "name": "royal_road_attack",
+        "duration": 5,
+        "networks": 2,
+        "nodes": 2,
+        "vulnerabilities": 7
+      }
+    },
+    {
+      "pdf_name": "demo017_1774422801_2021_quointelligence.eu-ReconHellcat Uses NIST Theme as Lure To Deliver New BlackSoul Malware.pdf",
+      "task_id": "demo017",
+      "timestamp": "2026-03-25 15:44:31",
+      "success": true,
+      "terraform_success": true,
+      "ansible_success": true,
+      "timing": {
+        "end_to_end_latency": 1870.71,
+        "iac_build_time": 404.84,
+        "pdf_extraction": 0.0,
+        "vsdl_generation": 404.68,
+        "vsdl_compilation": 0.16,
+        "terraform": 36.97,
+        "ansible": 1418.68
+      },
+      "scenario": {
+        "name": "nist_phishing_attack",
+        "duration": 5,
+        "networks": 2,
+        "nodes": 2,
+        "vulnerabilities": 3
+      }
+    },
+    {
+      "pdf_name": "demo029_1774427526_2022_Patchwork_Patchwork-APT-caught-in-its-own-web_MalwarebytesLabs.pdf",
+      "task_id": "demo029",
+      "timestamp": "2026-03-25 16:59:03",
+      "success": true,
+      "terraform_success": true,
+      "ansible_success": true,
+      "timing": {
+        "end_to_end_latency": 1616.76,
+        "iac_build_time": 304.63,
+        "pdf_extraction": 0.0,
+        "vsdl_generation": 304.47,
+        "vsdl_compilation": 0.17,
+        "terraform": 67.27,
+        "ansible": 1234.64
+      },
+      "scenario": {
+        "name": "patchwork_apt_attack",
+        "duration": 5,
+        "networks": 3,
+        "nodes": 4,
+        "vulnerabilities": 2
+      }
+    },
+    {
+      "pdf_name": "demo035_1774427589_2023_Flax Typhoon using legitimate software to quietly access Taiwanese organizations _ Microsoft Security Blog.pdf",
+      "task_id": "demo035",
+      "timestamp": "2026-03-25 16:45:58",
+      "success": false,
+      "terraform_success": true,
+      "ansible_success": false,
+      "timing": {
+        "end_to_end_latency": 768.67,
+        "iac_build_time": 268.27,
+        "pdf_extraction": 0.0,
+        "vsdl_generation": 268.1,
+        "vsdl_compilation": 0.17,
+        "terraform": 52.01,
+        "ansible": 438.16
+      },
+      "scenario": {
+        "name": "china_chopper_attack",
+        "duration": 5,
+        "networks": 2,
+        "nodes": 3,
+        "vulnerabilities": 5
+      }
+    },
+    {
+      "pdf_name": "demo051_1774430368_2024_Staying ahead of threat actors in the age of AI _ Microsoft Security Blog.pdf",
+      "task_id": "demo051",
+      "timestamp": "2026-03-25 17:45:29",
+      "success": true,
+      "terraform_success": true,
+      "ansible_success": true,
+      "timing": {
+        "end_to_end_latency": 1561.06,
+        "iac_build_time": 220.65,
+        "pdf_extraction": 0.0,
+        "vsdl_generation": 220.48,
+        "vsdl_compilation": 0.17,
+        "terraform": 37.35,
+        "ansible": 1292.84
+      },
+      "scenario": {
+        "name": "ai_enhanced_attack",
+        "duration": 5,
+        "networks": 2,
+        "nodes": 2,
+        "vulnerabilities": 2
+      }
+    }
+  ]
+}
